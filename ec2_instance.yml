@@ -1,0 +1,38 @@
+---
+  - host: localhost
+   - name: Setting Up Security / Firewall 
+     ec2_group: Ansible_Instance_Test
+     description:  Rules Allowing Traffic on port 22 and 443
+     region: ap-south-1
+     rules:
+       - proto: tcp
+         from_port: 443
+         to_port: 443
+         cidr_ip: 0.0.0.0/0
+       - proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: 0.0.0.0/0
+     rules_egress:
+        - proto: all
+          cidr_ip: 0.0.0.0/0
+
+   - name: Provision a EC2 Instance 
+     ec2:
+        key_name: GiriAnsible
+        region: ap-south-1
+        aws_access_key: xxxxxxxxxxxxxxx
+        aws_secret_key: XXXXXXXXXX
+        image: ami-xxxxx
+        instance_type: t2.micro
+        wait: yes
+        wait_timeout: 700
+        count: 1
+        instance_tags:
+            Name: Ansibletestinstance
+            owner: Giri
+        monitoring: no
+        vpc_subnet_id: subnet-c6e745ae
+        assign_public_ip: yes
+        group: Ansible_Instance_Test
+        register: ec2_out
