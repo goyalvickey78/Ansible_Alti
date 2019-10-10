@@ -1,0 +1,15 @@
+---
+- hosts: cde-mano
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+
+  tasks:
+  - lineinfile:
+      path: /etc/profile
+      line: "{{ item }}"
+      state: present
+    with_items:
+      -  export http_proxy=http://10.173.39.136:8888 
+      -  export https_proxy=https://10.173.39.136:8888  

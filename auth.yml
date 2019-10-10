@@ -1,0 +1,11 @@
+---
+- hosts: single03
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - lineinfile:
+      path: /etc/sysconfig/init
+      regexp: '^SINGLE=/sbin/sushell'
+      line: 'SINGLE=/sbin/sulogin'

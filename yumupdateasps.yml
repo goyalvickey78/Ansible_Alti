@@ -1,0 +1,14 @@
+---
+- hosts: den-ng-non-prod
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+      enablerepo: rhel-x86_64-server-6,rhel-x86_64-server-optional-6
+      exclude: mysql*,java*,httpd*,mod_ssl
+
+

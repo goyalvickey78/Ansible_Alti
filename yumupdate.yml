@@ -1,0 +1,23 @@
+---
+- hosts: mbng_test
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+      exclude: kernel*,mysql*
+
+
+# Reboot Server Once Yum update  Completed #
+  
+  - name: Restart server
+    command: /sbin/reboot
+    async: 0
+    poll: 0
+    ignore_errors: true
+      
+
+   

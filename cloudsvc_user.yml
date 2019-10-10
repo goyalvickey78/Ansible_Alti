@@ -1,0 +1,39 @@
+---
+ - hosts: den_check_alti
+
+   become: yes
+   become_method: sudo
+   become_user: root
+   gather_facts: no 
+
+   tasks:
+   - name: Adding user cloudsvc
+     user:
+       name: cloudsvc
+       state: present
+       remove: no
+   - name: Adding directory SSH
+     file:
+       path: /home/cloudsvc/.ssh
+       state: directory
+       owner: cloudsvc
+       group: cloudsvc
+       mode: 0700
+   - name: create file authorized_keys
+     file:
+       path: /home/cloudsvc/.ssh/authorized_keys
+       state: touch
+       owner: cloudsvc
+       group: cloudsvc
+       mode: 0600
+   - name: copy auth key from source to dest
+     copy:
+       src: '/home/cloudsvc/.ssh/authorized_keys'
+       dest: '/home/cloudsvc/.ssh/authorized_keys'
+   - name: Adding cloudsvc user to sudo 
+     lineinfile:
+       path: /etc/sudoers
+       insertafter: '^altisvc'
+       line: 'cloudsvc ALL=(ALL)       NOPASSWD: LOG_INPUT: LOG_OUTPUT: ALL'
+       
+   

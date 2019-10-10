@@ -1,0 +1,18 @@
+---
+- hosts: test
+  become: yes
+  become_user: root
+  gather_facts: yes 
+
+  tasks:
+  - user:
+     name: casvc
+     state: absent
+     remove: yes
+
+  tasks:
+  - user:
+     name: cloudsvc
+     password: $6$71lycNq0$NHt7T4gTZWcmZPn.AUoMZ/db2qdeE3DdCaXQv6SxTRMB2P.qIiH.WJhvTUOGkaS93OgxPoSya2CSH/pvfZ4C0/ 
+
+

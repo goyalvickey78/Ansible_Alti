@@ -1,0 +1,13 @@
+---
+- hosts: rf_nodes
+  become: yes
+  become_method: su 
+  become_user: root
+  gather_facts: False
+
+
+  tasks:
+  - name: Server rebooting
+    shell: Do rebooting
+    shell: reboot
+

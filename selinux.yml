@@ -1,0 +1,12 @@
+---
+ - hosts: mia_uat_altisvc
+
+   become: yes
+   become_method: su
+   become_user: root
+   gather_facts: no 
+
+   tasks:
+   - name: Adding user cloudsvc
+     selinux:
+       state: disabled 

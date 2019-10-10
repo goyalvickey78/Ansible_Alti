@@ -1,0 +1,7 @@
+---
+- hosts: den-ng-non-prod
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - script: /home/cloudsvc/a.sh

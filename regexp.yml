@@ -1,0 +1,18 @@
+---
+- hosts: R13538 
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+
+  tasks:
+  - replace:
+     path: /etc/profile
+     regexp: 'export http_proxy=http://10.173.39.136:8888'
+     replace: 'export http_proxy=http://10.173.39.151:8888'
+     backup: yes
+
+  - replace:
+     path: /etc/profile
+     regexp: 'export https_proxy=https://10.173.39.136:8888'
+     replace: 'export https_proxy=https://10.173.39.151:8888'

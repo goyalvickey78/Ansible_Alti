@@ -1,0 +1,12 @@
+---
+- hosts: utils
+  gather_facts: False
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  tasks:
+  - lineinfile:
+      path:  /etc/sysconfig/rhn/up2date
+      regexp: '^serverURL=http://i-s-pat-satl1.svc.den.vz.altidev.net/XMLRPC'
+      line: 'serverURL=http://10.173.39.161/XMLRPC'

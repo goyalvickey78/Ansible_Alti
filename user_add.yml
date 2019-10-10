@@ -1,0 +1,14 @@
+---
+ - hosts: muthuselvam.annamalai
+
+   become: yes
+   become_method: sudo
+   become_user: root
+   gather_facts: no 
+
+   tasks:
+   - name: Adding user
+     user:
+       name: uma.prakash 
+       state: present
+       remove: no

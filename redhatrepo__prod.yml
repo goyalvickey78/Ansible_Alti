@@ -1,0 +1,16 @@
+---
+- hosts: redhat_repo 
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: False
+
+
+  tasks:
+  - name: Redhat satellite  adding to  nodes
+    rhn_register:
+     state: present
+     username: satadmin
+     password: Sat@min#D
+     activationkey: 1-Denervers_all_server_Ansible
+     server_url: https://10.173.39.161

@@ -1,0 +1,36 @@
+---
+- hosts: icmp1
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+  tasks:
+  - sysctl:
+      name: net.ipv4.conf.all.accept_redirects
+      value: 0
+      sysctl_set: yes
+      state: present
+      reload: yes
+  - sysctl:
+      name: net.ipv4.conf.default.accept_redirects
+      value: 0
+      sysctl_set: yes
+      state: present
+      reload: yes
+  - sysctl:
+      name: net.ipv4.conf.all.secure_redirects
+      value: 0
+      sysctl_set: yes
+      state: present
+      reload: yes
+  - sysctl:
+      name: net.ipv4.conf.default.secure_redirects
+      value: 0
+  - sysctl:
+      name: net.ipv4.tcp_timestamps
+      value: 0
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+

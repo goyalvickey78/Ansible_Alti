@@ -1,0 +1,12 @@
+---
+- hosts: oct20
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: false
+
+  tasks:
+  - lineinfile:
+      path:  /boot/grub/grub.conf
+      regexp: '^timeout=5'
+      line: 'timeout=30'

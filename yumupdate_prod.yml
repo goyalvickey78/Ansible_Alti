@@ -1,0 +1,18 @@
+---
+- hosts: ibm_mia
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: False
+
+
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+      enablerepo: rhel-x86_64-server-6,rhel-x86_64-server-optional-6
+      disablerepo: altisource*,den-local,epel*,cloudera*,zabbix*,beats,mysql*,percona*,security:shibboleth
+      exclude: mysql*,java*,httpd*,mod_ssl,mongo*,percona*,haproxy*,postgresql*
+
+
